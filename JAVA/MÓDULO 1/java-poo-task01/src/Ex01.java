@@ -30,5 +30,6 @@ public class Ex01 {
 
         // Abaixo exibo a mensagem que é solicitada pelo enunciado da task :)
         System.out.printf("Olá seu nome é %s, você tem %d anos, é da cidade de %s, situada no estado de %s.", nome, idade, cidade, estado);
+        sc.close();
     }
 }

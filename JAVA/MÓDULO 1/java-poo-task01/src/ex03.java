@@ -28,7 +28,7 @@ public class ex03 {
                 "                                  \n");
 
         // Abaixo peço a palavra ao usuário
-        System.out.print("Digite uma palavra: ");
+        System.out.println("Digite uma palavra: ");
         String palavra = sc.nextLine().toLowerCase();
 
         // Abaixo verifico se a palavra está no dicionário
@@ -57,6 +57,7 @@ public class ex03 {
             System.out.println("Essa palavra não é válida.");
         }
 
+        sc.close();
     }
 }
 

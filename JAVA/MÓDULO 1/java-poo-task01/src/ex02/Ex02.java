@@ -44,7 +44,7 @@ public class Ex02 {
             System.out.println(estado.getId() + " - " + estado.getNome());
         }
 
-        System.out.print("\nEscolha o número do estado: ");
+        System.out.println("\nEscolha o número do estado: ");
         int estadoEscolhido = Integer.parseInt(sc.nextLine());
 
 
@@ -58,7 +58,7 @@ public class Ex02 {
             }
 
             // Aqui o usuário escolhe a cidade que quer ver as informações
-            System.out.print("Escolha o número da cidade: \n");
+            System.out.println("Escolha o número da cidade: \n");
             int cidadeEscolhida = Integer.parseInt(sc.nextLine());
 
             if (cidadeEscolhida >= 1 && cidadeEscolhida <= estadoSelecionado.getCidades().size()) {
@@ -77,6 +77,7 @@ public class Ex02 {
             System.out.println("Número do estado inválido.");
         }
 
+        sc.close();
     }
 }
 

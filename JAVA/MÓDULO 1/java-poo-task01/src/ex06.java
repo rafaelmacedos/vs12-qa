@@ -16,16 +16,16 @@ public class ex06 {
             System.out.println("Eleições...\n");
 
             // Abaixo peço ao usuário que faça as entradas dos votos para fazer o calculo de proporção
-            System.out.print("Digite o número total de eleitores: ");
+            System.out.println("Digite o número total de eleitores: ");
             int eleitores = Integer.parseInt(sc.nextLine());
 
-            System.out.print("Digite o número de votos em branco: ");
+            System.out.println("Digite o número de votos em branco: ");
             int brancos = Integer.parseInt(sc.nextLine());
 
-            System.out.print("Digite o número de votos nulos: ");
+            System.out.println("Digite o número de votos nulos: ");
             int nulos = Integer.parseInt(sc.nextLine());
 
-            System.out.print("Digite o número de votos válidos: ");
+            System.out.println("Digite o número de votos válidos: ");
             int validos = Integer.parseInt(sc.nextLine());
 
             // Aqui calculo a porcentagem
@@ -38,5 +38,6 @@ public class ex06 {
             System.out.println("Porcentagem de votos nulos: " + porcentagemNulos + "%");
             System.out.println("Porcentagem de votos válidos: " + porcentagemValidos + "%");
 
+            sc.close();
     }
 }

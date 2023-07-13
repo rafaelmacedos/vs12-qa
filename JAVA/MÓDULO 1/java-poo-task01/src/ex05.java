@@ -17,15 +17,16 @@ public class ex05 {
 
         // Abaixo recebo as entradas da base e altura
         // Novamente usei cast para evitar bugs do scanner
-        System.out.print("Digite a base do retângulo: ");
+        System.out.println("Digite a base do retângulo: ");
         double base = Double.parseDouble(sc.nextLine());
 
-        System.out.print("Digite a altura do retângulo: ");
+        System.out.println("Digite a altura do retângulo: ");
         double altura = Double.parseDouble(sc.nextLine());
 
         // Abaixo a formula do calculo da area
         double area = base * altura;
 
         System.out.println("A área do retângulo é: " + area);
+        sc.close();
     }
 }
