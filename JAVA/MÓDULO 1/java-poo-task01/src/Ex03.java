@@ -7,18 +7,6 @@ public class Ex03 {
         // Declarando o scanner e recebendo como paramêtro a entrada do sistema
         Scanner sc = new Scanner(System.in);
 
-        // Aqui criei um dicionário e adicionei as palavras suas respectivas traduções
-        Map<String, String> traducoes = new HashMap<>();
-        traducoes.put("cachorro", "dog");
-        traducoes.put("tempo", "time");
-        traducoes.put("amor", "love");
-        traducoes.put("cidade", "city");
-        traducoes.put("feliz", "happy");
-        traducoes.put("triste", "sad");
-        traducoes.put("deveria", "should");
-        traducoes.put("poderia", "could");
-
-
         System.out.println("\n" +
                 "  _______  __           ___ _____ \n" +
                 " | ____\\ \\/ /          / _ \\___ / \n" +
@@ -26,33 +14,29 @@ public class Ex03 {
                 " | |___ /  \\  |_____| | |_| |__) |\n" +
                 " |_____/_/\\_\\          \\___/____/ \n" +
                 "                                  \n");
-
         // Abaixo peço a palavra ao usuário
         System.out.println("Digite uma palavra: ");
         String palavra = sc.nextLine().toLowerCase();
 
-        // Abaixo verifico se a palavra está no dicionário
-        if (traducoes.containsKey(palavra)) {
-            // Tradução de português para inglês
-            // Aqui pego apenas o valor da chave que é a palavra em inglês
-            String traducaoPtBr = traducoes.get(palavra);
-            System.out.println("Tradução para o inglês: " + traducaoPtBr);
+        // Aqui criei um dicionário e adicionei as palavras suas respectivas traduções
+        if (palavra.equals("cachorro")) {System.out.println("Tradução para o inglês: Dog");}
+        else if (palavra.equals("tempo")) {System.out.println("Tradução para o inglês: Time");}
+        else if (palavra.equals("amor")) {System.out.println("Tradução para o inglês: Love");}
+        else if (palavra.equals("cidade")) {System.out.println("Tradução para o inglês: City");}
+        else if (palavra.equals("feliz")) {System.out.println("Tradução para o inglês: Happy");}
+        else if (palavra.equals("triste")) {System.out.println("Tradução para o inglês: Sad");}
+        else if (palavra.equals("deveria")) {System.out.println("Tradução para o inglês: Should");}
+        else if (palavra.equals("poderia")) {System.out.println("Tradução para o inglês: Could");}
 
-        }
-        // Senão for a chave então verifico se é valor
-        else if (traducoes.containsValue(palavra)) {
-            // Tradução de inglês para português
-            // Percorro todas as entradas do dicionário para encontrar a palavra relacionada a entrada do usuário
-            // Pra essa lógica tive que recorrer ao chatGPT, pois não tenho conhecimento suficiente nessa estrutura de dados
-            for (Map.Entry<String, String> entry : traducoes.entrySet()) {
-                if (entry.getValue().equals(palavra)) {
-                    String traducaoPtBr = entry.getKey();
-                    System.out.println("Tradução para o português: " + traducaoPtBr);
-                    break;
-                }
+        else if (palavra.equals("dog")) {System.out.println("Tradução para o português: Cachorro");}
+        else if (palavra.equals("time")) {System.out.println("Tradução para o português: Tempo");}
+        else if (palavra.equals("love")) {System.out.println("Tradução para o português: Amor");}
+        else if (palavra.equals("city")) {System.out.println("Tradução para o português: Cidade");}
+        else if (palavra.equals("happy")) {System.out.println("Tradução para o português: Feliz");}
+        else if (palavra.equals("sad")) {System.out.println("Tradução para o português: Triste");}
+        else if (palavra.equals("should")) {System.out.println("Tradução para o português: Deveria");}
+        else if (palavra.equals("could")) {System.out.println("Tradução para o português: Poderia");}
 
-            }
-        }
         else {
             System.out.println("Essa palavra não é válida.");
         }
