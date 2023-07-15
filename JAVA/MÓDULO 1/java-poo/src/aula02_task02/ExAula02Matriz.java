@@ -6,23 +6,34 @@ public class ExAula02Matriz {
                 {10, 10},
                 {10, 5}
         };
-        int somaTodos = (matriz[0][0] + matriz[0][1]) + (matriz[1][0] + matriz[1][1]);
+
+        // Abaixo faço o loop para a soma de todos
+        int somaTodos = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                somaTodos += matriz[i][j];
+            }
+        }
         System.out.println("Soma: " + somaTodos);
 
-        int somaPrimeiraLinha = matriz[0][0] + matriz[0][1];
+        // Abaixo faço o loop para a soma da primeira linha
+        int somaPrimeiraLinha = 0;
+        for (int j = 0; j < 2; j++) {
+            somaPrimeiraLinha += matriz[0][j];
+        }
         System.out.println("Soma primeira linha: " + somaPrimeiraLinha);
 
-        int somaSegundaLinha = matriz[1][0] + matriz[1][1];
+        // Abaixo faço o loop para a soma da segunda linha
+        int somaSegundaLinha = 0;
+        for (int j = 0; j < 2; j++) {
+            somaSegundaLinha += matriz[1][j];
+        }
         System.out.println("Soma segunda linha: " + somaSegundaLinha);
 
-        int subtracao = (matriz[0][0] + matriz[0][1]) - (matriz[1][0] + matriz[1][1]);
+        // Subtração e apresento o último valor :)
+        int subtracao = somaPrimeiraLinha - somaSegundaLinha;
         System.out.println("Subtração da primeira linha pela segunda linha: " + subtracao);
 
-        int[][] matriz3 = {
-                {10, 3, 74},
-                {23, 4, 84},
-                {43, 5, 92}
-        };
 
     }
 }
