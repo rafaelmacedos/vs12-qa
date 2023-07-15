@@ -1,3 +1,5 @@
+package aula01_task01;
+
 import java.util.Scanner;
 
 public class Ex06 {

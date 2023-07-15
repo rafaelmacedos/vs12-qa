@@ -1,3 +1,5 @@
+package aula01_task01;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;

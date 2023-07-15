@@ -1,3 +1,5 @@
+package aula01_task01;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -38,7 +40,7 @@ public class Ex09 {
         long horas = duracao.toHours();
         long minutos = duracao.toMinutes() % 60;
 
-        System.out.printf("Duração do jogo: %d horas e %d minutos%n", horas, minutos);
+        System.out.printf("Duração do jogo: %d horas e %d minutos\n", horas, minutos);
 
         sc.close();
     }
