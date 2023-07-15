@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class exAula02for {
+public class ExAula02for {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int[] inteiros = new int[5];
