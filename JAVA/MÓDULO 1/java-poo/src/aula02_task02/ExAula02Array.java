@@ -1,3 +1,5 @@
+package aula02_task02;
+
 public class ExAula02Array {
     public static void main(String[] args) {
         int inteiros[] = {12, 55, 33};

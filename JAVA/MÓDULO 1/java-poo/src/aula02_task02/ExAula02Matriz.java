@@ -1,3 +1,5 @@
+package aula02_task02;
+
 public class ExAula02Matriz {
     public static void main(String[] args) {
         int[][] matriz = {

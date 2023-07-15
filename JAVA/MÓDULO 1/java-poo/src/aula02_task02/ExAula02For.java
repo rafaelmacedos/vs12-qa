@@ -1,6 +1,8 @@
+package aula02_task02;
+
 import java.util.Scanner;
 
-public class ExAula02for {
+public class ExAula02For {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int[] inteiros = new int[5];
