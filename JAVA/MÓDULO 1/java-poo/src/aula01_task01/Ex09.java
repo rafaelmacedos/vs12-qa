@@ -1,8 +1,10 @@
+package aula01_task01;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Scanner;
 
-public class ex09 {
+public class Ex09 {
     public static void main(String[] args) {
         // Declarando o scanner e recebendo como paramêtro a entrada do sistema
         Scanner sc = new Scanner(System.in);
@@ -38,7 +40,7 @@ public class ex09 {
         long horas = duracao.toHours();
         long minutos = duracao.toMinutes() % 60;
 
-        System.out.printf("Duração do jogo: %d horas e %d minutos%n", horas, minutos);
+        System.out.printf("Duração do jogo: %d horas e %d minutos\n", horas, minutos);
 
         sc.close();
     }

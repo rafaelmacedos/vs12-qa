@@ -1,6 +1,8 @@
+package aula01_task01;
+
 import java.util.Scanner;
 
-public class ex10 {
+public class Ex10 {
     public static void main(String[] args) {
         // Declarando o scanner e recebendo como paramêtro a entrada do sistema
         Scanner sc = new Scanner(System.in);
