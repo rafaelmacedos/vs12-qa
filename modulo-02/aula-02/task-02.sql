@@ -1,0 +1,20 @@
+-- 1
+SELECT nome FROM VEM_SER.PAIS ORDER BY nome DESC;
+
+-- 2
+SELECT logradouro, cep FROM VEM_SER.ENDERECO WHERE UPPER(logradouro) LIKE 'A%';
+
+-- 3
+SELECT * FROM VEM_SER.ENDERECO WHERE cep LIKE '%0';
+
+-- 4
+SELECT * FROM VEM_SER.ENDERECO WHERE numero BETWEEN 1 AND 100;
+
+-- 5
+SELECT * FROM VEM_SER.ENDERECO WHERE UPPER(logradouro) LIKE 'RUA%' ORDER BY cep DESC;
+
+-- 6
+SELECT COUNT(*) AS quantidade_enderecos FROM ENDERECO e;
+
+-- 7
+SELECT id_cidade, COUNT(*) AS quantidade_enderecos FROM ENDERECO e GROUP BY id_cidade;
