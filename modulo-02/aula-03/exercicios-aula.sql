@@ -1,0 +1,57 @@
+-- Exercicio 1
+UPDATE VEM_SER.ENDERECO SET logradouro = 'Avenida Mirante', complemento = 'Casinha'
+WHERE id_endereco = 2 OR id_endereco = 3;
+
+SELECT * FROM ENDERECO e;
+
+UPDATE VEM_SER.ENDERECO SET numero = 999999 WHERE id_endereco = 4;
+
+DELETE FROM VEM_SER.ENDERECO WHERE id_endereco = (SELECT MAX(id_endereco) FROM VEM_SER.ENDERECO)
+
+DELETE FROM VEM_SER.ENDERECO WHERE numero = 999999
+
+DELETE FROM VEM_SER.ENDERECO WHERE id_endereco IN (4, 5);
+
+
+-- Exercicio 2
+
+-- Exemplo Rafael
+SELECT * FROM ESTADO e 
+LEFT JOIN PAIS p   ON (e.id_pais = p.id_pais)
+LEFT JOIN CIDADE c ON (e.id_estado  = c.id_estado)
+WHERE p.id_pais = 2;
+
+-- Cross join Pessoa Contato
+SELECT * FROM PESSOA p CROSS JOIN CONTATO;
+
+-- Inner join Pessoa Contato
+SELECT * FROM PESSOA INNER JOIN CONTATO
+ON PESSOA.id_pessoa = CONTATO.id_pessoa;
+
+-- Inner join Pessoa - PESSOA_X_PESSOA_ENDERECO - ENDERECO_PESSOA
+SELECT * FROM PESSOA
+INNER JOIN PESSOA_X_PESSOA_ENDERECO ON PESSOA.id_pessoa = PESSOA_X_PESSOA_ENDERECO.id_pessoa
+INNER JOIN ENDERECO_PESSOA ON PESSOA_X_PESSOA_ENDERECO.id_endereco = ENDERECO_PESSOA.id_endereco;
+
+-- Inner join entre todas as tabelas
+SELECT * FROM PESSOA
+INNER JOIN PESSOA_X_PESSOA_ENDERECO ON PESSOA.id_pessoa = PESSOA_X_PESSOA_ENDERECO.id_pessoa
+INNER JOIN ENDERECO_PESSOA ON PESSOA_X_PESSOA_ENDERECO.id_endereco = ENDERECO_PESSOA.id_endereco
+INNER JOIN CONTATO ON PESSOA.id_pessoa = CONTATO.id_pessoa;
+
+-- Left join Pessoa e Contato
+SELECT * FROM PESSOA
+LEFT JOIN CONTATO ON PESSOA.id_pessoa = CONTATO.id_pessoa;
+
+-- Left join Pessoa - PESSOA_X_PESSOA_ENDERECO - ENDERECO_PESSOA
+SELECT * FROM PESSOA
+LEFT JOIN PESSOA_X_PESSOA_ENDERECO ON PESSOA.id_pessoa = PESSOA_X_PESSOA_ENDERECO.id_pessoa
+LEFT JOIN ENDERECO_PESSOA ON PESSOA_X_PESSOA_ENDERECO.id_endereco = ENDERECO_PESSOA.id_endereco;
+
+-- Left join entre todas as tabelas
+SELECT * FROM PESSOA
+LEFT JOIN PESSOA_X_PESSOA_ENDERECO ON PESSOA.id_pessoa = PESSOA_X_PESSOA_ENDERECO.id_pessoa
+LEFT JOIN ENDERECO_PESSOA ON PESSOA_X_PESSOA_ENDERECO.id_endereco = ENDERECO_PESSOA.id_endereco 
+LEFT JOIN CONTATO ON PESSOA.id_pessoa = CONTATO.id_pessoa 
+
+
