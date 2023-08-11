@@ -1,0 +1,1277 @@
+{
+	"info": {
+		"_postman_id": "de789723-6e65-44f8-a532-73dc789b2c12",
+		"name": "Produtos - Task 02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29024782",
+		"_collection_link": "https://lunar-capsule-594756.postman.co/workspace/ServeRest---Macedo~be0d07dd-a2a6-4fff-922b-8e5b24ba31e0/collection/29024782-de789723-6e65-44f8-a532-73dc789b2c12?action=share&creator=29024782&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "Busca sem parâmetros bem-sucedida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve ser 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exceção de Parâmetro \"nome\" Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve ser 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Quantidade de produtos deve ser 0\",\r",
+									"   pm.expect(pm.response.json().quantidade).to.eq(0)\r",
+									")\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos?nome=**%26$*475823(>34",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "**%26$*475823(>34"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exceção de Parâmetro \"preço\" negativo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve ser 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Preço deve ser um número positivo\",\r",
+									"   pm.expect(pm.response.json().preco).to.eq(\"preco deve ser um número positivo\")\r",
+									")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos?preco=-50",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "preco",
+									"value": "-50"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token_api}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "Cadastro bem-sucedido",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Produto cadastrado com sucesso\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Deletar após cadastro\", pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\" + \"/\" + pm.response.json()._id,\r",
+									"  method: \"DELETE\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\" : pm.environment.get(\"token_api\")\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"token_api\", JSON.parse(res.text()).authorization)\r",
+									"}));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token_api}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{nomeProduto}}\",\r\n    \"preco\": {{precoProduto}},\r\n    \"descricao\": \"{{descricaoProduto}}\",\r\n    \"quantidade\": {{quantidadeProduto}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produto já existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código 400\",\r",
+									"    pm.response.to.have.status(400)\r",
+									")\r",
+									"\r",
+									"pm.test(\"Já existe produto com esse nome\",\r",
+									"   pm.response.to.have.jsonBody(\"message\", \"Já existe produto com esse nome\")\r",
+									")\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token_api}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"lo MX Vertical\",\r\n    \"preco\": {{precoProduto}},\r\n    \"descricao\": \"{{descricaoProduto}}\",\r\n    \"quantidade\": {{quantidadeProduto}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Acesso não autorizado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código 401\",\r",
+									"    pm.response.to.have.status(401)\r",
+									")\r",
+									"\r",
+									"pm.test(\"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\",\r",
+									"   pm.response.to.have.jsonBody(\"message\", \"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\")\r",
+									")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvbnlAcWEuY29tLmJyIiwicGFzc3dvcmQiOiJ0ZXN0ZSIsImlhdCI6MTY5MTU1MzAwOSwiZXhwIjoxNjkxNTUzNjA5fQ.6OkzkswZT0TNl-3Lnl_Y6f_U4mgh22b_i-CsN5f2wr4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{nomeProduto}}\",\r\n    \"preco\": {{precoProduto}},\r\n    \"descricao\": \"{{descricaoProduto}}\",\r\n    \"quantidade\": {{quantidadeProduto}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "GET/ID",
+			"item": [
+				{
+					"name": "Busca bem-sucedida por ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\",\r",
+									"  method: \"POST\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\": pm.environment.get(\"token_api\")\r",
+									"  },\r",
+									"  body: {\r",
+									"      mode : 'raw',\r",
+									"      raw : JSON.stringify(pm.environment.get(\"novoProduto\"))\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"produtoID\", JSON.parse(res.text())._id)\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deletar após cadastro\", pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\" + \"/\" + pm.environment.get(\"produtoID\"),\r",
+									"  method: \"DELETE\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\" : pm.environment.get(\"token_api\")\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"token_api\", JSON.parse(res.text()).authorization)\r",
+									"}));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{produtoID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produto não encontrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve retornar 400\", function() {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Produto não encontrado\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Produto não encontrado\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4324234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Requisição com ID Vazio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve retornar 400\", function() {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Produto não encontrado\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Produto não encontrado\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token_api}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Exclusão bem-sucedida",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"nomeProduto\", pm.variables.replaceIn(\"{{$randomProduct}}\"));\r",
+									"pm.environment.set(\"descricaoProduto\", pm.variables.replaceIn(\"{{$randomProductAdjective}}\"));\r",
+									"\r",
+									"const randomPrice = Math.floor(Math.random() * 1000) + 1;\r",
+									"const randomInt = Math.floor(Math.random() * 1000);\r",
+									"\r",
+									"pm.environment.set(\"precoProduto\", pm.variables.replaceIn(randomPrice))\r",
+									"pm.environment.set(\"quantidadeProduto\", pm.variables.replaceIn(randomInt))\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\",\r",
+									"  method: \"POST\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\": pm.environment.get(\"token_api\")\r",
+									"  },\r",
+									"  body: {\r",
+									"      mode : 'raw',\r",
+									"      raw : JSON.stringify(pm.environment.get(\"novoProduto\"))\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"produtoID\", JSON.parse(res.text())._id)\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve retornar 200\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Registro excluído com sucesso\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Registro excluído com sucesso\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token_api}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{produtoID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produto faz parte de carrinho",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve retornar 400\", function() {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Não é permitido excluir produto que faz parte de carrinho\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Não é permitido excluir produto que faz parte de carrinho\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token_api}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "K6leHdftCeOJj8BJ"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve retornar 401\", function() {\r",
+									"    pm.response.to.have.status(401);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"nomeProduto\", pm.variables.replaceIn(\"{{$randomProduct}}\"));\r",
+									"pm.environment.set(\"descricaoProduto\", pm.variables.replaceIn(\"{{$randomProductAdjective}}\"));\r",
+									"\r",
+									"const randomPrice = Math.floor(Math.random() * 1000) + 1;\r",
+									"const randomInt = Math.floor(Math.random() * 1000);\r",
+									"\r",
+									"pm.environment.set(\"precoProduto\", pm.variables.replaceIn(randomPrice))\r",
+									"pm.environment.set(\"quantidadeProduto\", pm.variables.replaceIn(randomInt))\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\",\r",
+									"  method: \"POST\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\": pm.environment.get(\"token_api\")\r",
+									"  },\r",
+									"  body: {\r",
+									"      mode : 'raw',\r",
+									"      raw : JSON.stringify(pm.environment.get(\"novoProduto\"))\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"produtoID\", JSON.parse(res.text())._id)\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "invalidToken23434324fjdsjfdasfdsgfgfdg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{produtoID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "PUT",
+			"item": [
+				{
+					"name": "Atualização bem-sucedida",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"nomeProduto\", pm.variables.replaceIn(\"{{$randomProduct}}\"));\r",
+									"pm.environment.set(\"descricaoProduto\", pm.variables.replaceIn(\"{{$randomProductAdjective}}\"));\r",
+									"\r",
+									"const randomPrice = Math.floor(Math.random() * 1000) + 1;\r",
+									"const randomInt = Math.floor(Math.random() * 1000);\r",
+									"\r",
+									"pm.environment.set(\"precoProduto\", pm.variables.replaceIn(randomPrice))\r",
+									"pm.environment.set(\"quantidadeProduto\", pm.variables.replaceIn(randomInt))\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\",\r",
+									"  method: \"POST\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\": pm.environment.get(\"token_api\")\r",
+									"  },\r",
+									"  body: {\r",
+									"      mode : 'raw',\r",
+									"      raw : JSON.stringify(pm.environment.get(\"novoProduto\"))\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"produtoID\", JSON.parse(res.text())._id)\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"nomeProduto\", \"Nome Atualizado\")\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Consultar após atualização\", pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\" + \"/\" + pm.environment.get(\"produtoID\"),\r",
+									"  method: \"GET\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\" : pm.environment.get(\"token_api\")\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"token_api\", JSON.parse(res.text()).authorization);\r",
+									"  console.log(res.text());\r",
+									"  pm.expect(pm.environment.get(\"nomeProduto\")).to.eql(res.json().nome);\r",
+									"}));\r",
+									"\r",
+									"\r",
+									"pm.test(\"Deletar após atualização\", pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\" + \"/\" + pm.environment.get(\"produtoID\"),\r",
+									"  method: \"DELETE\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\" : pm.environment.get(\"token_api\")\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"token_api\", JSON.parse(res.text()).authorization)\r",
+									"}));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token_api}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{nomeProduto}}\",\r\n    \"preco\": {{precoProduto}},\r\n    \"descricao\": \"{{descricaoProduto}}\",\r\n    \"quantidade\": {{quantidadeProduto}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{produtoID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro bem-sucedido (usuário não encontrado)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Consultar após cadastro\", pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\" + \"/\" + pm.environment.get(\"produtoID\"),\r",
+									"  method: \"GET\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\" : pm.environment.get(\"token_api\")\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"token_api\", JSON.parse(res.text()).authorization)\r",
+									"}));\r",
+									"\r",
+									"var idNovoProduto = pm.response.json()._id;\r",
+									"\r",
+									"pm.test(\"Deletar após atualização\", pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\" + \"/\" + idNovoProduto,\r",
+									"  method: \"DELETE\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\" : pm.environment.get(\"token_api\")\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"token_api\", JSON.parse(res.text()).authorization)\r",
+									"}));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{token_api}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{nomeProduto}}\",\r\n    \"preco\": {{precoProduto}},\r\n    \"descricao\": \"{{descricaoProduto}}\",\r\n    \"quantidade\": {{quantidadeProduto}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "234234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token inválido",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"  url : pm.variables.get(\"base_url\") + \"/produtos\",\r",
+									"  method: \"POST\",\r",
+									"  header: {\r",
+									"    \"Content-Type\": \"application/json\",\r",
+									"    \"Authorization\": pm.environment.get(\"token_api\")\r",
+									"  },\r",
+									"  body: {\r",
+									"      mode : 'raw',\r",
+									"      raw : JSON.stringify(pm.environment.get(\"novoProduto\"))\r",
+									"  }\r",
+									"}, function (err, res) {\r",
+									"    \r",
+									"  if (err) {\r",
+									"    console.error(\"Erro na requisição:\", err);\r",
+									"    return;\r",
+									"  }\r",
+									"\r",
+									"  pm.environment.set(\"produtoID\", JSON.parse(res.text())._id)\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"nomeProduto\", \"Nome Atualizado\")\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código deve retornar 401\", function() {\r",
+									"    pm.response.to.have.status(401);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "sdfdsfdssdgdsg2342134",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{nomeProduto}}\",\r\n    \"preco\": {{precoProduto}},\r\n    \"descricao\": \"{{descricaoProduto}}\",\r\n    \"quantidade\": {{quantidadeProduto}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{produtoID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LOGIN",
+			"item": [
+				{
+					"name": "LOGAR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"////// AUTENTICAÇÃO/AUTORIZAÇÃO ///////////",
+					"",
+					"pm.sendRequest({",
+					"  url : pm.variables.get(\"base_url\") + \"/login\",",
+					"  method: \"POST\",",
+					"  header: {",
+					"    \"Content-Type\": \"application/json\"",
+					"  },",
+					"  body: {",
+					"      mode : 'raw',",
+					"      raw : JSON.stringify({",
+					"        \"email\" : pm.variables.get(\"email\"),",
+					"        \"password\" : pm.variables.get(\"password\")",
+					"  })",
+					"  ",
+					"  }",
+					"}, function (err, res) {",
+					"    ",
+					"  if (err) {",
+					"    console.error(\"Erro na requisição:\", err);",
+					"    return;",
+					"  }",
+					"",
+					"  pm.environment.set(\"token_api\", JSON.parse(res.text()).authorization)",
+					"});",
+					"",
+					"////// CRIAR NOVO PRODUTO ///////////",
+					"",
+					"// Nomes gerados no chatGPT para evitar as repetições",
+					"const adjetivos = ['Crimson', 'Místico', 'Celestial', 'Abissal', 'Eterno', 'Radiante', 'Nebuloso', 'Vívido', 'Enigmático', 'Épico', 'Inovador', 'Vibrante', 'Elegante', 'Sutil', 'Futurista', 'Cintilante', 'Atemporal', 'Esmeralda', 'Turquesa', 'Carmesim'];",
+					"const substantivos = ['Fênix', 'Serpente', 'Aurora', 'Espectro', 'Nova', 'Crônica', 'Harmonia', 'Eclipse', 'Infinito', 'Gênese', 'Inspiração', 'Horizonte', 'Odisseia', 'Labirinto', 'Miragem', 'Resplendor', 'Vórtice', 'Quasar', 'Ícaro', 'Pulsar'];",
+					"",
+					"function gerarNomeProdutoAleatorio() {",
+					"  const adjetivoAleatorio = adjetivos[Math.floor(Math.random() * adjetivos.length)];",
+					"  const substantivoAleatorio = substantivos[Math.floor(Math.random() * substantivos.length)];",
+					"  ",
+					"  const numeroAleatorio = Math.floor(Math.random() * 10000); // Adiciona um número aleatório para tornar o nome mais único",
+					"  ",
+					"  const nomeProduto = `${adjetivoAleatorio} ${substantivoAleatorio} ${numeroAleatorio}`;",
+					"  return nomeProduto;",
+					"}",
+					"pm.environment.set(\"nomeProduto\", pm.variables.replaceIn(gerarNomeProdutoAleatorio()));",
+					"",
+					"pm.environment.set(\"descricaoProduto\", pm.variables.replaceIn(\"{{$randomProductAdjective}}\"));",
+					"",
+					"const randomPrice = Math.floor(Math.random() * 1000) + 1;",
+					"const randomInt = Math.floor(Math.random() * 1000);",
+					"",
+					"pm.environment.set(\"precoProduto\", pm.variables.replaceIn(randomPrice))",
+					"pm.environment.set(\"quantidadeProduto\", pm.variables.replaceIn(randomInt))",
+					"",
+					"const produto = {",
+					"  \"nome\": pm.environment.get(\"nomeProduto\"),",
+					"  \"preco\": pm.environment.get(\"precoProduto\"),",
+					"  \"descricao\": pm.environment.get(\"descricaoProduto\"),",
+					"  \"quantidade\": pm.environment.get(\"quantidadeProduto\")",
+					"}",
+					"",
+					"pm.environment.set(\"novoProduto\", produto)",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
