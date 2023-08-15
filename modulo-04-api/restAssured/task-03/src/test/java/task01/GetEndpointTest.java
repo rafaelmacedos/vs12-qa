@@ -1,4 +1,4 @@
-package task03;
+package task01;
 
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;

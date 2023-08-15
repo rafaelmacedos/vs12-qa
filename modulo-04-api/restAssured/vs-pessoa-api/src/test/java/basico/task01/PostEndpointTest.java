@@ -1,11 +1,13 @@
-package task03;
+package basico.task01;
 
+import basico.task01.pojo.ProdutoPojo;
 import io.restassured.http.ContentType;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import task03.pojo.ProdutoPojo;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
 
 public class PostEndpointTest {
     String token;
@@ -20,14 +22,14 @@ public class PostEndpointTest {
                 given()
                         .contentType(ContentType.JSON)
                         .body("{\"email\": \"fulano@qa.com\", \"password\": \"teste\"}")
-                .when()
+                        .when()
                         .post("/login")
-                .then()
+                        .then()
                         .extract().response().jsonPath().getString("authorization");
         ;
     }
 
-    @Test // CT-07 - Cadastro bem-sucedido (U7CLKRfjgYXzT4hn -> id gerado)
+    @Test // CT-07 - Cadastro bem-sucedido (Qk4OLh2VfXWnuY0v -> id gerado)
     public void testCadastrarProdutoComSucesso() {
         // Massa de Dados
         ProdutoPojo produtoPojo = new ProdutoPojo();

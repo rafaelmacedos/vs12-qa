@@ -1,12 +1,13 @@
-package task03;
+package task01;
 
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import task01.pojo.ProdutoPojo;
 
 import static io.restassured.RestAssured.*;
 
-public class DeleteEndpointTest {
+public class PutEndpointTest {
     String token;
 
     // Antes de cada teste obtém o token de autenticação e seta na variavel global
@@ -26,60 +27,85 @@ public class DeleteEndpointTest {
         ;
     }
 
-    @Test // CT-13 - Exclusão bem-sucedida
-    public void testDeletarProdutoPorIdComSucesso() {
+    @Test // CT-10 - Atualização bem-sucedida
+    public void testAtualizarProdutoPorIdComSucesso() {
         // Id válido
         String idProduto = "U7CLKRfjgYXzT4hn";
+
+        // Massa de Dados
+        ProdutoPojo produtoPojo = new ProdutoPojo();
+        produtoPojo.setNome("Amazon SmartVacuum");
+        produtoPojo.setPreco(449);
+        produtoPojo.setDescricao("Aspirador inteligente da Amazon");
+        produtoPojo.setQuantidade(89);
 
         // Requisição
         given()
                 .header("Authorization", this.token)
                 .contentType(ContentType.JSON)
                 .pathParam("_id", idProduto)
+                .body(produtoPojo)
                 .log().all()
         .when()
-                .delete("produtos/{_id}")
+                .put("/produtos/{_id}")
         .then()
                 .statusCode(200)
                 .log().all()
         ;
     }
 
-    @Test // CT-14 - Produto faz parte de carrinho
-    public void testDeletarProdutoPorIdQueEstaNoCarrinhoSemSucesso() {
+    @Test // CT-11 - Cadastro bem-sucedido (usuário não encontrado)
+    public void testCadastrarProdutoPorIdQueNaoExisteComSucesso() {
         // Id válido
-        String idProduto = "BeeJh5lz3k6kSIzA";
+        String idProduto = "gdfsgsd453535245";
+
+        // Massa de Dados
+        ProdutoPojo produtoAtualizadoPojo = new ProdutoPojo();
+        produtoAtualizadoPojo.setNome("Aoc Agon 31.5pol");
+        produtoAtualizadoPojo.setPreco(1559);
+        produtoAtualizadoPojo.setDescricao("Monitor Gamer");
+        produtoAtualizadoPojo.setQuantidade(93);
 
         // Requisição
         given()
                 .header("Authorization", this.token)
                 .contentType(ContentType.JSON)
                 .pathParam("_id", idProduto)
+                .body(produtoAtualizadoPojo)
                 .log().all()
         .when()
-                .delete("produtos/{_id}")
+                .put("/produtos/{_id}")
         .then()
-                .statusCode(400)
+                .statusCode(201)
                 .log().all()
         ;
     }
 
-    @Test // CT-15 - Token inválido
-    public void testDeletarProdutoPorIdComTokenInvalidoSemSucesso() {
+    @Test // CT-12 - Token inválido
+    public void testAtualizarProdutoPorIdComTokenInvalidoSemSucesso() {
         // Id válido
-        String idProduto = "U7CLKRfjgYXzT4hn";
+        String idProduto = "gdfsgsd453535245";
+
+        // Massa de Dados
+        ProdutoPojo produtoAtualizadoPojo = new ProdutoPojo();
+        produtoAtualizadoPojo.setNome("Aoc Agon 31.5pol");
+        produtoAtualizadoPojo.setPreco(1559);
+        produtoAtualizadoPojo.setDescricao("Monitor Gamer");
+        produtoAtualizadoPojo.setQuantidade(93);
 
         // Requisição
         given()
-                .header("Authorization", "dgg6765678gfjgh")
+                .header("Authorization", "dffswe54523gdsg4532")
                 .contentType(ContentType.JSON)
                 .pathParam("_id", idProduto)
+                .body(produtoAtualizadoPojo)
                 .log().all()
         .when()
-                .delete("produtos/{_id}")
+                .put("/produtos/{_id}")
         .then()
                 .statusCode(401)
                 .log().all()
         ;
     }
+
 }

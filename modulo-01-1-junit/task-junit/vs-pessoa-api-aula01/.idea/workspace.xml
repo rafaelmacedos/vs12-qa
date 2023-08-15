@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1654001f-95d9-490e-8430-21c7372f2390" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/basico/aula1/Aula1Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/basico/aula1/HelloWorldTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/basico/aula1/pojo/PessoaPojo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task03/DeleteEndpointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task01/DeleteEndpointTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task03/GetEndpointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task01/GetEndpointTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task03/PostEndpointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task01/PostEndpointTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task03/PutEndpointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task01/PutEndpointTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task03/pojo/ProdutoPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../modulo-04-api/restAssured/task-03/src/test/java/task01/pojo/ProdutoPojo.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="2TqdRClwVxzKTkaKS77OHZQxdmx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/DBC/vs12-qa/modulo-04-api/restAssured/vs-pessoa-api-aula01",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\DBC\vs12-qa\modulo-01-1-junit\task-junit\vs-pessoa-api-aula01\src\test\java\basico" />
+      <recent name="C:\DBC\vs12-qa\modulo-01-1-junit\task-junit\vs-pessoa-api-aula01\src\test\java\basico\aula2" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.Aula2Test.testBuscarPessoaPorCpfComSucesso">
+    <configuration name="Aula1Test.testAtualizarPessoaPorIdComSucesso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="vs-pessoa-api-aula01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="basico.aula1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="basico.aula1" />
+      <option name="MAIN_CLASS_NAME" value="basico.aula1.Aula1Test" />
+      <option name="METHOD_NAME" value="testAtualizarPessoaPorIdComSucesso" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aula1Test.testBuscarPessoaPorNomeComSucesso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="vs-pessoa-api-aula01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="basico.aula1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="basico.aula1" />
+      <option name="MAIN_CLASS_NAME" value="basico.aula1.Aula1Test" />
+      <option name="METHOD_NAME" value="testBuscarPessoaPorNomeComSucesso" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aula2Test.testBuscarPessoaPorCpfComSucesso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="vs-pessoa-api-aula01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="basico.aula1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="basico.aula1" />
+      <option name="MAIN_CLASS_NAME" value="basico.aula1.Aula2Test" />
+      <option name="METHOD_NAME" value="testBuscarPessoaPorCpfComSucesso" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Aula2Test.testListarPessoas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="vs-pessoa-api-aula01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="basico.aula1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="basico.aula1" />
+      <option name="MAIN_CLASS_NAME" value="basico.aula1.Aula2Test" />
+      <option name="METHOD_NAME" value="testListarPessoas" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Aula2Test.testBuscarPessoaPorCpfComSucesso" />
+        <item itemvalue="JUnit.Aula2Test.testListarPessoas" />
+        <item itemvalue="JUnit.Aula1Test.testBuscarPessoaPorNomeComSucesso" />
+        <item itemvalue="JUnit.Aula1Test.testAtualizarPessoaPorIdComSucesso" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1654001f-95d9-490e-8430-21c7372f2390" name="Changes" comment="" />
+      <created>1691774536420</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1691774536420</updated>
+    </task>
+    <servers />
+  </component>
+</project>
