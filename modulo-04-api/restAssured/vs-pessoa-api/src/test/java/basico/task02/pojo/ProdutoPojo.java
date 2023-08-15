@@ -1,10 +1,12 @@
-package task03.pojo;
+package basico.task02.pojo;
 
 public class ProdutoPojo {
     private String nome;
     private Integer preco;
     private String descricao;
     private Integer quantidade;
+
+    private String _id;
 
     public ProdutoPojo() {
     }
@@ -39,5 +41,13 @@ public class ProdutoPojo {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 }
