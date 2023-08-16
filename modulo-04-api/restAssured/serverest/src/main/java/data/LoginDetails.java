@@ -1,9 +1,11 @@
 package data;
 
-public class LoginDetails {
-    private static final String EMAIL = "fulano@qa.com";
+import utils.Manipulation;
 
-    private static final String SENHA = "teste";
+public class LoginDetails {
+    private static final String EMAIL =  Manipulation.getProp().getProperty("email");
+
+    private static final String SENHA = Manipulation.getProp().getProperty("senha");
 
     public static String retornarStringDeLogin() {
         return "{\"email\": \""+ EMAIL + "\", \"password\": \"" + SENHA + "\"}";
