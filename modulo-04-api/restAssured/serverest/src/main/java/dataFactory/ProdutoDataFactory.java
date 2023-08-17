@@ -1,7 +1,7 @@
 package dataFactory;
 
 import client.ProdutoClient;
-import model.PostResponse;
+import model.ApiResponse;
 import model.Produto;
 import net.datafaker.Faker;
 import org.apache.http.HttpStatus;
@@ -28,11 +28,11 @@ public class ProdutoDataFactory {
     }
 
     public static Produto produtoCadastradoAPI() {
-        PostResponse postResponse = produtoClient.cadastrarProduto(produtoValido())
+        ApiResponse postResponse = produtoClient.cadastrarProduto(produtoValido())
                 .then()
                     .statusCode(HttpStatus.SC_CREATED)
                     .extract()
-                    .as(PostResponse.class)
+                    .as(ApiResponse.class)
                 ;
         // Realizando requisição de get pelo id para saber se o produto foi cadastrado
         Produto produtoResult = produtoClient.getPeloId(postResponse.get_id())
@@ -70,7 +70,7 @@ public class ProdutoDataFactory {
     }
 
     public static Integer retornarPrecoNegativo() {
-        return faker.random().nextInt(-1, -10000);
+        return -50;
     }
 
     public static String retornarIdProdutoQueEstaNoCarrinho() {

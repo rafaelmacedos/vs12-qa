@@ -2,8 +2,7 @@ package tests.produto;
 
 import client.ProdutoClient;
 import dataFactory.ProdutoDataFactory;
-import model.DeleteResponse;
-import model.PostResponse;
+import model.ApiResponse;
 import model.Produto;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
@@ -19,20 +18,19 @@ public class ProdutoDeletePost {
     public void testDeveDeletarProdutoPorIdComSucesso() {
         // Gerando massa de dados
         Produto produto = ProdutoDataFactory.produtoValido();
-        String _id  = produtoClient.cadastrarProduto(produto).then().extract().as(PostResponse.class).get_id();
+        String _id  = produtoClient.cadastrarProduto(produto).then().extract().as(ApiResponse.class).get_id();
 
         // Realizando requisição de delete
-        PostResponse postResponse = produtoClient.excluirProduto(_id)
+        ApiResponse deleteResponse = produtoClient.excluirProduto(_id)
                 .then()
                     .statusCode(HttpStatus.SC_OK)
-                    .log().all()
                     .header("Content-Type", "application/json; charset=utf-8")
                     .time(lessThan(500L))
-                    .extract().as(PostResponse.class)
+                    .extract().as(ApiResponse.class)
                 ;
 
         // Realizando validação
-        Assertions.assertEquals("Registro excluído com sucesso", postResponse.getMessage());
+        Assertions.assertEquals("Registro excluído com sucesso", deleteResponse.getMessage());
     }
 
     @Test // CT-14 - Produto faz parte de carrinho
@@ -40,14 +38,13 @@ public class ProdutoDeletePost {
         String _id  = ProdutoDataFactory.retornarIdProdutoQueEstaNoCarrinho();
 
         // Realizando requisição de delete
-        DeleteResponse deleteResponse = produtoClient.excluirProduto(_id)
+        ApiResponse deleteResponse = produtoClient.excluirProduto(_id)
                 .then()
                     .statusCode(HttpStatus.SC_BAD_REQUEST)
-                    .log().all()
                     .header("Content-Type", "application/json; charset=utf-8")
                     .time(lessThan(500L))
                     .body("idCarrinhos", hasItem("qbMqntef4iTOwWfg"))
-                    .extract().as(DeleteResponse.class)
+                    .extract().as(ApiResponse.class)
                 ;
 
         // Realizando validação
@@ -58,20 +55,19 @@ public class ProdutoDeletePost {
     public void testDeveDeletarProdutoPorIdComTokenInvalidoSemSucesso() {
         // Gerando massa de dados
         Produto produto = ProdutoDataFactory.produtoValido();
-        String _id  = produtoClient.cadastrarProduto(produto).then().extract().as(PostResponse.class).get_id();
+        String _id  = produtoClient.cadastrarProduto(produto).then().extract().as(ApiResponse.class).get_id();
 
         // Realizando requisição de delete
-        PostResponse postResponse = produtoClient.excluirProdutoComTokenInvalido(_id)
+        ApiResponse deleteResponse = produtoClient.excluirProdutoComTokenInvalido(_id)
                 .then()
                     .statusCode(HttpStatus.SC_UNAUTHORIZED)
-                    .log().all()
                     .header("Content-Type", "application/json; charset=utf-8")
                     .time(lessThan(500L))
-                    .extract().as(PostResponse.class)
+                    .extract().as(ApiResponse.class)
                 ;
 
         // Realizando validação
-        Assertions.assertEquals("Token de acesso ausente, inválido, expirado ou usuário do token não existe mais", postResponse.getMessage());
+        Assertions.assertEquals("Token de acesso ausente, inválido, expirado ou usuário do token não existe mais", deleteResponse.getMessage());
     }
 
 }

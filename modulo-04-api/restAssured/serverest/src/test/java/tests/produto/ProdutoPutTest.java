@@ -2,8 +2,8 @@ package tests.produto;
 
 import client.ProdutoClient;
 import dataFactory.ProdutoDataFactory;
+import model.ApiResponse;
 import model.Produto;
-import model.PutResponse;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,12 +18,11 @@ public class ProdutoPutTest {
         Produto produto = ProdutoDataFactory.produtoComDadosAtualizados();
 
         // Realizando requisição de put
-        PutResponse putResponse = produtoClient.atualizarProduto(produto.get_id(), produto)
+        ApiResponse putResponse = produtoClient.atualizarProduto(produto.get_id(), produto)
                 .then()
                     .statusCode(HttpStatus.SC_OK)
-                    .log().all()
                     .extract()
-                    .as(PutResponse.class)
+                    .as(ApiResponse.class)
                 ;
 
         // Realizando validação
@@ -37,15 +36,14 @@ public class ProdutoPutTest {
     public void testDeveCadastrarProdutoPorIdQueNaoExisteComSucesso() {
         // Gerando massa de dados
         Produto produto = ProdutoDataFactory.produtoValido();
-        produto.set_id("fd123fdsafafrqafv6");
+        produto.set_id(ProdutoDataFactory.retornarIdInvalido());
 
         // Realizando requisição de put
-        PutResponse putResponse = produtoClient.atualizarProduto(produto.get_id(), produto)
+        ApiResponse putResponse = produtoClient.atualizarProduto(produto.get_id(), produto)
                 .then()
                     .statusCode(HttpStatus.SC_CREATED)
-                    .log().all()
                     .extract()
-                    .as(PutResponse.class)
+                    .as(ApiResponse.class)
                 ;
 
 
@@ -62,12 +60,11 @@ public class ProdutoPutTest {
         Produto produto = ProdutoDataFactory.produtoComDadosAtualizados();
 
         // Realizando requisição de put
-        PutResponse putResponse = produtoClient.atualizarProdutoComTokenInvalido(produto.get_id(), produto)
+        ApiResponse putResponse = produtoClient.atualizarProdutoComTokenInvalido(produto.get_id(), produto)
                 .then()
                     .statusCode(HttpStatus.SC_UNAUTHORIZED)
-                    .log().all()
                     .extract()
-                    .as(PutResponse.class)
+                    .as(ApiResponse.class)
                 ;
 
 
