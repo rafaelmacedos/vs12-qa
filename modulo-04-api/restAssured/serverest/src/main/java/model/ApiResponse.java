@@ -5,13 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class PutResponse {
+@NoArgsConstructor
+public class ApiResponse {
     private String message;
-    private String _id;
-    private String nome;
-    private Integer preco;
-    private String descricao;
+    private String[] idCarrinhos;
     private Integer quantidade;
+    private Produto[] produtos;
+    private String nome;
+    private Object preco;
+    private String descricao;
+    private String _id;
 }

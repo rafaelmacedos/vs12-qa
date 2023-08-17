@@ -2,7 +2,7 @@ package tests.produto;
 
 import client.ProdutoClient;
 import dataFactory.ProdutoDataFactory;
-import model.GetResponse;
+import model.ApiResponse;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -16,13 +16,13 @@ public class ProdutoGetTest {
 
     @Test // CT-04 - Busca sem parâmetros bem-sucedida
     public void testDeveBuscarTodosProdutosComSucesso(){
-        GetResponse getResponse = produtoClient.getTodos()
+        ApiResponse getResponse = produtoClient.getTodos()
                 .then()
                     .statusCode(HttpStatus.SC_OK)
                     .log().all()
                     .body("produtos.nome", Matchers.hasItem("Logitech G29"))
                     .extract()
-                    .as(GetResponse.class)
+                    .as(ApiResponse.class)
                 ;
 
         // Validações
@@ -36,13 +36,13 @@ public class ProdutoGetTest {
     public void testDeveBuscarComParametroNomeSemSucesso() {
         String nome = ProdutoDataFactory.retornarNomeInvalido();
 
-        GetResponse getResponse = produtoClient.getPeloNome(nome)
+        ApiResponse getResponse = produtoClient.getPeloNome(nome)
                 .then()
                     .statusCode(HttpStatus.SC_OK)
                     .time(lessThan(500L))
                     .log().all()
                     .extract()
-                    .as(GetResponse.class)
+                    .as(ApiResponse.class)
                 ;
 
         Assertions.assertAll("Asserções para Get Produtos",
@@ -55,13 +55,13 @@ public class ProdutoGetTest {
     public void testDeveBuscarComParametroPrecoNegativoSemSucesso() {
         Integer preco = ProdutoDataFactory.retornarPrecoNegativo();
 
-        GetResponse getResponse = produtoClient.getPeloPreco(preco)
+        ApiResponse getResponse = produtoClient.getPeloPreco(preco)
                 .then()
                     .statusCode(HttpStatus.SC_BAD_REQUEST)
                     .time(lessThan(500L))
                     .log().all()
                     .extract()
-                    .as(GetResponse.class)
+                    .as(ApiResponse.class)
                 ;
 
         Assertions.assertEquals("preco deve ser um número positivo", getResponse.getPreco());
@@ -71,13 +71,13 @@ public class ProdutoGetTest {
     public void testDeveBuscarPorIdComSucesso() {
         String _id = ProdutoDataFactory.retornarIdValidoLogitechMXVertical();
 
-        GetResponse getResponse = produtoClient.getPeloId(_id)
+        ApiResponse getResponse = produtoClient.getPeloId(_id)
                 .then()
                     .statusCode(HttpStatus.SC_OK)
                     .time(lessThan(500L))
                     .log().all()
                     .extract()
-                    .as(GetResponse.class)
+                    .as(ApiResponse.class)
                 ;
 
         Assertions.assertAll("Asserções para Get Produtos",

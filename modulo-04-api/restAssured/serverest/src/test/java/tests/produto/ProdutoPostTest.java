@@ -2,7 +2,7 @@ package tests.produto;
 
 import client.ProdutoClient;
 import dataFactory.ProdutoDataFactory;
-import model.PostResponse;
+import model.ApiResponse;
 import model.Produto;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
@@ -20,20 +20,18 @@ public class ProdutoPostTest {
         Produto produto = ProdutoDataFactory.produtoValido();
 
         // Realizando requisição de post
-        PostResponse postResponse = produtoClient.cadastrarProduto(produto)
+        ApiResponse postResponse = produtoClient.cadastrarProduto(produto)
                 .then()
                     .statusCode(HttpStatus.SC_CREATED)
-                    .log().all()
                     .header("Content-Type", "application/json; charset=utf-8")
                     .time(lessThan(500L))
-                    .extract().as(PostResponse.class)
+                    .extract().as(ApiResponse.class)
                 ;
 
         // Realizando requisição de get pelo id para saber se o produto foi cadastrado
         Produto produtoResult = produtoClient.getPeloId(postResponse.get_id())
                 .then()
                     .statusCode(HttpStatus.SC_OK)
-                    .log().all()
                     .header("Content-Type", "application/json; charset=utf-8")
                     .time(lessThan(500L))
                     .extract().as(Produto.class);
@@ -57,13 +55,12 @@ public class ProdutoPostTest {
         Produto produtoDuplicado = produtoClient.getPeloId(idExistente).then().extract().as(Produto.class);
 
         // Realizando requisição de post
-        PostResponse postResponse = produtoClient.cadastrarProduto(produtoDuplicado)
+        ApiResponse postResponse = produtoClient.cadastrarProduto(produtoDuplicado)
                 .then()
                     .statusCode(HttpStatus.SC_BAD_REQUEST)
-                    .log().all()
                     .header("Content-Type", "application/json; charset=utf-8")
                     .time(lessThan(500L))
-                    .extract().as(PostResponse.class)
+                    .extract().as(ApiResponse.class)
                     ;
 
         // Realizando validação
@@ -76,13 +73,12 @@ public class ProdutoPostTest {
         Produto produto = ProdutoDataFactory.produtoValido();
 
         // Realizando requisição de post
-        PostResponse postResponse = produtoClient.cadastrarProdutoComTokenInvalido(produto)
+        ApiResponse postResponse = produtoClient.cadastrarProdutoComTokenInvalido(produto)
                 .then()
                     .statusCode(HttpStatus.SC_UNAUTHORIZED)
-                    .log().all()
                     .header("Content-Type", "application/json; charset=utf-8")
                     .time(lessThan(500L))
-                    .extract().as(PostResponse.class)
+                    .extract().as(ApiResponse.class)
                     ;
 
         // Realizando validação
